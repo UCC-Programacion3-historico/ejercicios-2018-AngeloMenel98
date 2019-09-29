@@ -17,7 +17,7 @@ int main() {
 
     l.print();
 
-    l.moverPri(2);
+    l.moverPri(5);
     l.print();
 
 
