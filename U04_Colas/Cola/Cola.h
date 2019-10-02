@@ -25,6 +25,8 @@ public:
     bool esVacia();
 
     T peek();
+
+    void prioridad(int num, T dato); //Prioridad del 0 al 4.
 };
 
 
@@ -38,7 +40,6 @@ Cola<T>::Cola() {
     fondo = nullptr;
 }
 
-// live.marku.me
 /**
  * Destructor de la clase Cola, se encarga de liberar la memoria de todos los nodos
  * utilizados en la Cola
@@ -118,6 +119,10 @@ T Cola<T>::peek() {
         throw 404;
 
     return frente->getDato();
+}
+
+template<class T>
+void Cola<T>::prioridad(int num, T dato) {
 }
 
 #endif //LISTA_H

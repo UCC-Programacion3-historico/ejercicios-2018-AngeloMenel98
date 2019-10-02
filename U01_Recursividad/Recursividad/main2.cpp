@@ -1,6 +1,6 @@
-//
-// Created by Angelo on 28/9/2019.
-//
+
+/* Función recursiva que tenga un parámetro que sea entero positivo y
+   despliegue en la pantalla ese número de asteriscos: “*”, todos en una línea.*/
 
 #include <iostream>
 
