@@ -3,5 +3,6 @@
 
 int main() {
     std::cout << "Ejercicio 01/04\n" << std::endl;
-    return 0;
+    int z=mcd(12,8);
+    std::cout<<"mcd: "<<z<<std::endl;
 }

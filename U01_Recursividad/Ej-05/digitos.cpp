@@ -19,4 +19,12 @@ unsigned int resto(unsigned int a, unsigned int b) {
 }
 
 
-void escribir_espaciado(unsigned int num) {}
+void escribir_espaciado(unsigned int num) {
+    if (cociente(num, 10) < 10) {
+        std::cout << cociente(num,10)<<" "<<resto(num,10) << " ";
+        return;
+    } else {
+        escribir_espaciado(cociente(num, 10));
+        std::cout<<resto(num,10)<<" ";
+    }
+}
