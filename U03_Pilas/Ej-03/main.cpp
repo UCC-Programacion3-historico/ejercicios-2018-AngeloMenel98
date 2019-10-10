@@ -5,8 +5,8 @@ int main() {
     std::cout << "Ejercicio 03/03\n" << std::endl;
     Pila<float> P1;
     int j=0;
-    for (int i = 0; i <=2; i++) {
-        P1.push(j+ 2);
-    }
-    std::cout << P1.peek() << std::endl;
+    P1.push(1.5);
+    P1.push(1.6);
+    P1.push(1.7);
+    std::cout << "El dato que esta en la cima es: "<<P1.peek() << std::endl;
 }

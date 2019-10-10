@@ -1,6 +1,7 @@
-//
-// Created by Angelo on 28/9/2019.
-//
+
+/*Hacer una función que dada una frase ingresada por teclado la imprima invertida.
+Implementar la función con la estructura de datos vista más adecuada*/
+
 #include <iostream>
 #include "../Cola/Cola.h"
 

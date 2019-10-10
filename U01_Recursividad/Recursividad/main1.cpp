@@ -1,6 +1,7 @@
-//
-// Created by Angelo on 28/9/2019.
-//
+
+/*Escriba una función void recursiva que reciba como parámetro solo un entero positivo
+n y que despliegue todos los enteros impares menores a n*/
+
 #include <iostream>
 
 void impar(int num) {
