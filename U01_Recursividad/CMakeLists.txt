@@ -1,5 +1,5 @@
 
-add_executable(U01-E01 Ej-01/main.cpp Ej-01/potencia.cpp Recursividad/main1.cpp Recursividad/main2.cpp)
+add_executable(U01-E01 Ej-01/main.cpp Ej-01/potencia.cpp)
 
 add_executable(U01-E02 Ej-02/main.cpp Ej-02/sumatoria.cpp)
 
@@ -9,7 +9,6 @@ add_executable(U01-E04 Ej-04/main.cpp Ej-04/mcd.cpp)
 
 add_executable(U01-E05 Ej-05/main.cpp Ej-05/digitos.cpp)
 
-add_executable(U01-RecMain Recursividad/main1.cpp)
 
 
 #find_package(Qt5Widgets REQUIRED)
