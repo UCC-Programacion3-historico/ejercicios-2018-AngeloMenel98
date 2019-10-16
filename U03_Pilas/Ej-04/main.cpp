@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    char txt[] = "{3*[52+(3-5)/2]-5}*2)";
+    char txt[] = "{3*[52+(3-5)/2]-5}*2))";
     Pila<char> p;
     char tmp;
     bool correcto = true;
@@ -45,11 +45,7 @@ int main() {
     }
 
     if (correcto && p.esVacia())
-        cout << "Todo OK";
+        cout << "Todo OK" << endl;
     else
-        cout << "No esta bien";
-
-
-    std::cout << "Ejercicio 03/04\n" << std::endl;
-    return 0;
+        cout << "No esta bien" << endl;
 }

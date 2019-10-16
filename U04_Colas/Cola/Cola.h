@@ -25,8 +25,6 @@ public:
     bool esVacia();
 
     T peek();
-
-    void prioridad(int num, T dato); //Prioridad del 0 al 4.
 };
 
 
@@ -119,10 +117,6 @@ T Cola<T>::peek() {
         throw 404;
 
     return frente->getDato();
-}
-
-template<class T>
-void Cola<T>::prioridad(int num, T dato) {
 }
 
 #endif //LISTA_H

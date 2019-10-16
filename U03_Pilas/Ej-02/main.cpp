@@ -6,7 +6,7 @@ int main() {
     Pila<float> P1, P2;
     for (int i = 0; i < 5; i++) {
         P1.push(i + 2);
-        P2.push(i + 2);
+        P2.push(i + 3);
     }
     int p=0;
     for (int i = 0; i < 5; i++) {

@@ -1,6 +1,3 @@
-//
-// Created by martin on 11/10/19.
-//
 #include "../Cola/Cola.h"
 
 #ifndef PROGRAMACION3_COLAPRIORIDA_H
@@ -10,7 +7,9 @@
 class ColaPriorida {
     Cola<int> *colas;
     int tamanio;
-    ColaPriorida(int cant){
+
+public:
+    explicit ColaPriorida(int cant) {
         tamanio = cant;
         colas = new Cola<int>[cant];
     }
@@ -29,6 +28,33 @@ class ColaPriorida {
         }
         throw 404;
     }
+
+    void print() {
+        for (int i = 0; i < tamanio; ++i) {
+            while (!colas[i].esVacia())
+                std::cout << colas[i].desencolar() << "->";
+        }
+        std::cout << "NULL" << std::endl;
+    }
+
+    int suma() {
+        int plus = 0;
+        for (int i = 0; i < tamanio; ++i) {
+            while (!colas[i].esVacia())
+                plus = plus + colas[i].desencolar();
+        }
+        return plus;
+    }
+
+    int cantprior(int prioridad) {
+        int plus = 0;
+        while (!colas[prioridad].esVacia()) {
+            colas[prioridad].desencolar();
+            plus++;
+        }
+        return plus;
+    }
+
 };
 
 

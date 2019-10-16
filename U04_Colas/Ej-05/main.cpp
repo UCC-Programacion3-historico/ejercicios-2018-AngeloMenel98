@@ -1,7 +1,12 @@
 #include <iostream>
-#include "../Cola/Cola.h"
+#include "ColaPriorida.h"
 
 int main() {
-    std::cout << "Ejercicio 04/05\n" << std::endl;
-    return 0;
+    ColaPriorida C1(2);
+    C1.encolar(300,0);
+    C1.encolar(252,1);
+    C1.encolar(501,0);
+    std::cout<<"Monto total gastado: "<<C1.suma()<<std::endl;
+    C1.print();
+    //std::cout<<"Cantidad de embarazadas: "<<C1.cantprior(0)<<std::endl;
 }

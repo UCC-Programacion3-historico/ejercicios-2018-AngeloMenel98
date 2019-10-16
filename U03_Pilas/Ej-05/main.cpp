@@ -2,7 +2,6 @@
 #include "../Pila/Pila.h"
 
 int main() {
-    std::cout << "Ejercicio 03/05\n" << std::endl;
     char arr[50];
     Pila<char> p;
 
@@ -18,15 +17,21 @@ int main() {
             }
             p.pop();        //Elimina de la Pila el parentesis izquierdo.
         }
-        if ((arr[i] == '+' || arr[i] == '-') && (p.peek() == '+' || p.peek() == '-')) {
-            std::cout << p.pop();
-            p.push(arr[i]);
-        }
-        if ((arr[i] == '*' || arr[i] == '/') && (p.peek() == '*' || p.peek() == '/')) {
-            std::cout << p.pop();
-            p.push(arr[i]);
+        try {
+            if ((arr[i] == '+' || arr[i] == '-') && (p.peek() == '+' || p.peek() == '-')) {
+                std::cout << p.pop();
+                p.push(arr[i]);
+            }
+            if ((arr[i] == '*' || arr[i] == '/') && (p.peek() == '*' || p.peek() == '/')) {
+                std::cout << p.pop();
+                p.push(arr[i]);
+            }
+        } catch (int e) {
         }
         if (arr[i] == '(' || arr[i] == '+' || arr[i] == '-' || arr[i] == '*' || arr[i] == '/' || arr[i] == '^')
             p.push(arr[i]);
     }
+    while (!p.esVacia())
+        std::cout << p.pop();
+
 }
