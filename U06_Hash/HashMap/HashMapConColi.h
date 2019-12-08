@@ -1,8 +1,7 @@
 #ifndef HASHMAP_H
 #define HASHMAP_H
 
-#include "HashEntry.h"
-#include <map>
+#include "ArbolBinarioAVL.h"
 
 template<class K, class T>
 class HashMap {
@@ -11,7 +10,8 @@ private:
 
     unsigned int (*hashFuncP)(K clave);
 
-    std::map<K, T> **tabla;
+    ArbolBinarioAVL<K, T> **tabla;
+
     unsigned int tamanio;
 
 
@@ -23,6 +23,8 @@ public:
     T get(K clave);
 
     void put(K clave, T valor);
+
+    bool Coli(K clave, T valor);
 
     void remove(K clave);
 
@@ -36,10 +38,11 @@ public:
 
 template<class K, class T>
 HashMap<K, T>::HashMap(unsigned int k) {
+    tabla = new ArbolBinarioAVL<K, T> *[k];
     tamanio = k;
     hashFuncP = hashFunc;
     for (int i = 0; i < tamanio; ++i) {
-        tabla[i] = new std::map<K, T>;
+        tabla[i] = nullptr;
     }
 }
 
@@ -52,32 +55,45 @@ template<class K, class T>
 T HashMap<K, T>::get(K clave) {
     unsigned int idx;
     idx = hashFuncP(clave) % tamanio;
-    auto it = tabla[idx]->find(clave);
-    if (it == tabla[idx]->end()) {
+    if (tabla[idx] == nullptr)
         throw 404;
-    }
-    return it->second;
+    return tabla[idx]->search(clave);
 }
 
 template<class K, class T>
 void HashMap<K, T>::put(K clave, T valor) {
     unsigned int idx;
     idx = hashFuncP(clave) % tamanio;
-    if (tabla[idx]->find(clave) == tabla[idx]->end())
-        tabla[idx]->insert(make_pair(clave, valor));
-    else
-        throw 404;
+    if (tabla[idx] == nullptr) {
+        tabla[idx] = new ArbolBinarioAVL<K, T>;
+        tabla[idx]->put(clave, valor);
+    } else
+        tabla[idx]->put(clave, valor);
+}
+
+template<class K, class T>
+bool HashMap<K, T>::Coli(K clave, T valor) {
+    unsigned int idx;
+    idx = hashFuncP(clave) % tamanio;
+    if (tabla[idx] == nullptr)
+        return false;
+    try {
+        tabla[idx]->search(clave);
+        return true;
+    } catch (...) {
+        return false;
+    }
 }
 
 template<class K, class T>
 void HashMap<K, T>::remove(K clave) {
     unsigned int idx;
     idx = hashFuncP(clave) % tamanio;
-    auto it = tabla[idx]->find(clave);
-    if (it == tabla[idx]->end()) {
+    if (tabla[idx] == nullptr || tabla[idx]->getClave() != clave) {
         throw 404;
     }
-    tabla[idx]->erase(it);
+    delete tabla[idx];
+    tabla[idx] = nullptr;
 }
 
 template<class K, class T>
@@ -91,31 +107,39 @@ bool HashMap<K, T>::esVacio() {
 
 template<class K, class T>
 unsigned int HashMap<K, T>::hashFunc(K clave) {
+    //Nuestra funcion hash??
     return clave;
 }
 
 template<class K, class T>
 HashMap<K, T>::HashMap(unsigned int k, unsigned int (*fp)(K)) {
+    tabla = new ArbolBinarioAVL<K, T> *[k];
     tamanio = k;
     hashFuncP = fp;
     for (int i = 0; i < tamanio; ++i) {
-        tabla[i] = new std::map<K, T>;
+        tabla[i] = nullptr;
     }
-
 }
-//
-//template<class K, class T>
-//void HashMap<K, T>::print() {
-//    for (int i = 0; i < tamanio; ++i) {
-//
-//        std::cout << i << "\t";
-//        if (tabla[i] != nullptr)
-//            std::cout << tabla[i]->getDato();
-//
-//        std::cout << std::endl;
-//
-//    }
-//}
+
+template<class K, class T>
+void HashMap<K, T>::print() {
+    for (int i = 1; i < tamanio; ++i) {
+
+        std::cout << i << "\t";
+        int tam = tabla[i]->tamanio();
+        if (tabla[i] != nullptr && tam > 1)
+            tabla[i]->inorder();
+        else {
+            try {
+                std::cout << tabla[i]->getdato();
+            } catch (int) {
+                std::cout << std::endl;
+            }
+        }
+
+        std::cout << std::endl;
+    }
+}
 
 
 #endif //HASHMAP_H
