@@ -89,11 +89,7 @@ template<class K, class T>
 void HashMap<K, T>::remove(K clave) {
     unsigned int idx;
     idx = hashFuncP(clave) % tamanio;
-    if (tabla[idx] == nullptr || tabla[idx]->getClave() != clave) {
-        throw 404;
-    }
-    delete tabla[idx];
-    tabla[idx] = nullptr;
+    tabla[idx]->remove(clave);
 }
 
 template<class K, class T>
@@ -123,20 +119,19 @@ HashMap<K, T>::HashMap(unsigned int k, unsigned int (*fp)(K)) {
 
 template<class K, class T>
 void HashMap<K, T>::print() {
-    for (int i = 1; i < tamanio; ++i) {
+    for (int i = 0; i < tamanio; ++i) {
 
         std::cout << i << "\t";
         int tam = tabla[i]->tamanio();
-        if (tabla[i] != nullptr && tam > 1)
+        if (tabla[i] != nullptr && tam > 1) {
             tabla[i]->inorder();
-        else {
+        } else {
             try {
                 std::cout << tabla[i]->getdato();
             } catch (int) {
                 std::cout << std::endl;
             }
         }
-
         std::cout << std::endl;
     }
 }

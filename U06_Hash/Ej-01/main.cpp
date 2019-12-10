@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include "../HashMap/HashMapConColi.h"
+#include "../HashMap/ArbolBinarioAVL.h"
 
 using namespace std;
 
@@ -13,6 +14,8 @@ int main() {
 
     th.put(13, "Hola");
     th.put(325, "Chau");
+    th.put(14,"Casa");
+
     th.print();
 }
 

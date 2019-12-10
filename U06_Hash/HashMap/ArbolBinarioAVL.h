@@ -16,6 +16,14 @@ public:
         der = izq = nullptr;
         altura = 0;
     }
+
+    void setIzq(NodoArbolAVL<K, T> *izq) {
+        NodoArbolAVL<K, T>::izq = izq;
+    }
+
+    void setDer(NodoArbolAVL<K, T> *der) {
+        NodoArbolAVL<K, T>::der = der;
+    }
 };
 
 template<class K, class T>
@@ -54,6 +62,8 @@ public:
 
     void inorder();
 
+    void remove(K clave);
+
 private:
     NodoArbolAVL<K, T> *put(K clave, T dato, NodoArbolAVL<K, T> *r);
 
@@ -66,6 +76,8 @@ private:
     int tamanio(NodoArbolAVL<K, T> *r);
 
     void inorder(NodoArbolAVL<K, T> *r);
+
+    NodoArbolAVL<K, T> *remove(K clave, NodoArbolAVL<K, T> *r);
 
     int altura(NodoArbolAVL<K, T> *r) {
         if (r == nullptr)
@@ -251,6 +263,51 @@ void ArbolBinarioAVL<K, T>::inorder(NodoArbolAVL<K, T> *r) {
     std::cout << r->dato << "->";
     inorder(r->der);
     std::cout << "NULL";
+}
+
+template<class K, class T>
+void ArbolBinarioAVL<K, T>::remove(K clave) {
+    raiz = remove(clave, raiz);
+}
+
+template<class K, class T>
+NodoArbolAVL<K, T> *ArbolBinarioAVL<K, T>::remove(K clave, NodoArbolAVL<K, T> *r) {
+    NodoArbolAVL<K, T> *aux;
+    if (r == nullptr) {
+        throw 404;
+    }
+    if (r->clave == clave) {
+        // Borrar nodo
+        if (r->izq == nullptr && r->der == nullptr) {
+            delete r;
+            return nullptr;
+        } else if (r->izq == nullptr && r->der != nullptr) {
+            aux = r->der;
+            delete r;
+            return aux;
+        } else if (r->izq != nullptr && r->der == nullptr) {
+            aux = r->izq;
+            delete r;
+            return aux;
+        } else if (r->izq != nullptr && r->der != nullptr) {
+            bool enc;
+            if (r->izq->der != nullptr) {
+                aux = buscarMax(r->izq, &enc);
+                aux->setDer(r->der);
+                aux->setIzq(r->izq);
+            } else {
+                aux = r->izq;
+                r->izq->setDer(r->der);
+            }
+            delete r;
+            return aux;
+        }
+    } else if (r->clave > clave) {
+        r->setIzq(remove(clave, r->izq));
+    } else {
+        r->setDer(remove(clave, r->der));
+    }
+    return r;
 }
 
 
